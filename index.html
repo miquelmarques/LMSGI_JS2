@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Activitat 1 JS Miquel Marques</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <form action="index.html" method="post">
+        <label for="usuari">Nom d'usuari:</label> <br>
+        <input type="text" id="usuari" name="usuari" pattern=".{0,}[@].{0,}" onchange="UsuariValid()"> <br>
+        <label for="contrasenya">Contrasenya:</label> <br>
+        <input type="password" id="contrasenya" name="contrasenya" onchange="ContraValid()"> <br>
+        <input type="checkbox" id="mostrar" name="mostrar" onclick="PasswordShow()"><label for="mostrar">Mostrar contrasenya</label><br>
+        <input type="submit" value="Enviar">
+    </form>
+    <div id="requisitsusuari">
+        <h3>El nom d'usuari ha de tenir</h3>
+        <p id="arrova" class="invalid">Una @</p>
+    </div>
+    <div id="requisitscontrassenya">
+        <h3>La contrassenya d'usuari ha de tenir</h3>
+        <p id="minuscula" class="invalid">Una lletra <b>minúscula</b></p>
+        <p id="majuscula" class="invalid">Una lletra <b>majúscula</b></p>
+        <p id="numero" class="invalid">Un <b>número</b></p>
+        <p id="longitud" class="invalid">Minim  <b>8 caracters</b></p>
+    </div>
+</body>
+</html>
