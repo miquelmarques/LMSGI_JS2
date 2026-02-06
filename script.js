@@ -17,7 +17,6 @@ function UsuariValid() {
     // Condicions regex de trobar un @
     var arrovalletres = /@/;
     if (usuarInput.value.match(arrovalletres)) {
-        console.log("correcte");
         arrova.classList.remove("invalid");
         arrova.classList.add("valid");
     } else {
@@ -26,7 +25,7 @@ function UsuariValid() {
     }
 }
 function ContraValid (){
-    var contraInput = document.getElementById("contrassenya");
+    var contraInput = document.getElementById("contrasenya");
     var Minuscula = document.getElementById("minuscula");
     var Majuscula = document.getElementById("majuscula");
     var Numero = document.getElementById("numero");
@@ -34,7 +33,6 @@ function ContraValid (){
     // Condicions regex de trobar una minuscula
     var MinsuculaComprovacio = /[a-z]/g;
     if (contraInput.value.match(MinsuculaComprovacio)) {
-        console.log("correcte");
         Minuscula.classList.remove("invalid");
         Minuscula.classList.add("valid");
     } else {
@@ -44,7 +42,6 @@ function ContraValid (){
     // Condicions regex de trobar una majuscula
     var MajusculaComprovacio = /[A-Z]/g;
     if (contraInput.value.match(MajusculaComprovacio)) {
-        console.log("correcte");
         Majuscula.classList.remove("invalid");
         Majuscula.classList.add("valid");
     } else {
@@ -52,14 +49,21 @@ function ContraValid (){
         Majuscula.classList.add("invalid");
     }
     // Condicions regex de trobar un numero
-     var numeroComprovacio = /[0-9]/g;
+    var numeroComprovacio = /[0-9]/g;
     if (contraInput.value.match(numeroComprovacio)) {
-        console.log("correcte");
         Numero.classList.remove("invalid");
         Numero.classList.add("valid");
     } else {
         Numero.classList.remove("valid");
         Numero.classList.add("invalid");
+    }
+    // Condicions regex de trobar el lenght
+    if (contraInput.value.length >= 8) {
+        Longitud.classList.remove("invalid");
+        Longitud.classList.add("valid");
+    } else {
+        Longitud.classList.remove("valid");
+        Longitud.classList.add("invalid");
     }
 
 }
