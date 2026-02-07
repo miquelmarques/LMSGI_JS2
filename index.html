@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <title>Activitat 1 JS Miquel Marques</title>
@@ -7,20 +7,20 @@
     <script src="script.js"></script>
 </head>
 <body>
-    <form action="index.html" method="post">
+    <form action="pelis.html" method="post">
         <label for="usuari">Nom d'usuari:</label> <br>
-        <input type="text" id="usuari" name="usuari" pattern=".{0,}[@].{0,}" onchange="UsuariValid()"> <br>
+        <input type="text" id="usuari" name="usuari" pattern=".{0,}[@].{0,}" onchange="UsuariValid()" required> <br>
         <label for="contrasenya">Contrasenya:</label> <br>
-        <input type="password" id="contrasenya" name="contrasenya" onchange="ContraValid()"> <br>
-        <input type="checkbox" id="mostrar" name="mostrar" onclick="PasswordShow()" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><label for="mostrar">Mostrar contrasenya</label><br>
+        <input type="password" id="contrasenya" name="contrasenya" onchange="ContraValid()" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required> <br>
+        <div><input type="checkbox" id="mostrar" name="mostrar" onclick="PasswordShow()" ><label for="mostrar">Mostrar contrasenya</label><br></div>
         <input type="submit" value="Enviar">
     </form>
     <div id="requisitsusuari">
         <h3>El nom d'usuari ha de tenir</h3>
         <p id="arrova" class="invalid">Una @</p>
     </div>
-    <div id="requisitscontrassenya">
-        <h3>La contrassenya d'usuari ha de tenir</h3>
+    <div id="requisitscontrasenya">
+        <h3>La contrasenya d'usuari ha de tenir</h3>
         <p id="minuscula" class="invalid">Una lletra <b>minúscula</b></p>
         <p id="majuscula" class="invalid">Una lletra <b>majúscula</b></p>
         <p id="numero" class="invalid">Un <b>número</b></p>
