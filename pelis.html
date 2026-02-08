@@ -80,46 +80,45 @@
       var cerca = document.getElementById("cerca").value;
       document.getElementById("film-container").innerHTML = null;
       if (cerca == null) {
-        resultats = films;
+        resultats = films; //fa que si no hi ha text i realitza una cerca mostri tot
       } 
       else {
       var resultats = films.filter((peli) => Object.values(peli).some((valor) => String(valor).toLowerCase().includes(cerca.toLowerCase()))
-
+        //fa una cerca per tots els valors de peliqules independement que estigui en majuscula o minuscula.
       );
     }
-
-    console.log(resultats);
     for (let i in resultats) {
       const div = document.createElement("div");
       const targeta = document.createElement("div");
       targeta.classList.add("targeta");
       div.classList.add("card");
-      var titol = document.createElement("h3");
+      var titol = document.createElement("h3"); //crea un element html en la clau titol
       titol.innerHTML = resultats[i].name;
-      titol.classList.add("targeta-titol");
+      titol.classList.add("targeta-titol"); //afegeix la classe
       var anys = document.createElement("p");
       anys.innerHTML = "<b> Year: </b>" + resultats[i].year;
-      anys.classList.add("targeta-info");
+      anys.classList.add("targeta-info"); 
       var estil = document.createElement("p");
       estil.innerHTML = "<b> Style: </b>" + resultats[i].style;
-      estil.classList.add("targeta-info");
+      estil.classList.add("targeta-info"); 
       var direct = document.createElement("p");
       direct.innerHTML = "<b> Director: </b>" + resultats[i].director;
-      direct.classList.add("targeta-info");
+      direct.classList.add("targeta-info"); 
       var actors = document.createElement("p");
-      actors.classList.add("targeta-info");
+      actors.classList.add("targeta-info"); 
       actors.innerHTML = "<b> Actors: </b>" + resultats[i].actors;
       var oscars = document.createElement("p");
-      oscars.classList.add("targeta-info");
+      oscars.classList.add("targeta-info"); 
       oscars.innerHTML = "<b> Oscars: </b>" + resultats[i].oscars;
-      targeta.appendChild(titol);
-      targeta.appendChild(anys);
-      targeta.appendChild(estil);
-      targeta.appendChild(direct);
-      targeta.appendChild(actors);
-      targeta.appendChild(oscars);
-      div.appendChild(targeta);
-      document.getElementById("film-container").appendChild(div);
+      targeta.appendChild(titol);//afegeix titol dins de targeta amb la seva classe targeta-titol i el seu text
+      targeta.appendChild(anys);//afegeix any dins de targeta
+      targeta.appendChild(estil);//afegeix estil dins de targeta
+      targeta.appendChild(direct);//afegeix director dins de targeta
+      targeta.appendChild(actors);//afegeix actors dins de targeta
+      targeta.appendChild(oscars); //afegeix oscars dins de targeta
+      div.appendChild(targeta); //afegeix el element targeta dins del div
+      document.getElementById("film-container").appendChild(div);       //mostra el resultat de la cerca afegint-lo en el document del div
+
     }
     }
 
