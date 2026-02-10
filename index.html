@@ -1,30 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ca">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Activitat 1 JS Miquel Marques</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-</head>
-<body>
+    <style>
+
+input[type=submit]  {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+#message_nom {
+  display:block;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px 10px 10px 50px;
+  margin-top: 5px;
+}
+
+#message_nom p {
+  padding: 5px 25px;
+  font-size: 18px;
+}
+
+#message_passwd {
+  display:block;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 10px 10px 10px 50px;
+  margin-top: 5px;
+}
+
+#message_passwd p {
+  padding: 5px 25px;
+  font-size: 18px;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -20px;
+  content: "✔";
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -20px;
+  content: "✖";
+}
+</style>
+  </head>
+  <body>
     <form action="pelis.html" method="post">
-        <label for="usuari">Nom d'usuari:</label> <br>
-        <input type="text" id="usuari" name="usuari" pattern=".{0,}[@].{0,}" onchange="UsuariValid()" required> <br>
-        <label for="contrasenya">Contrasenya:</label> <br>
-        <input type="password" id="contrasenya" name="contrasenya" onchange="ContraValid()" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required> <br>
-        <div><input type="checkbox" id="mostrar" name="mostrar" onclick="PasswordShow()" ><label for="mostrar">Mostrar contrasenya</label><br></div>
-        <input type="submit" value="Enviar">
+        <div class="container">
+      <label for="usuari">Nom:</label> <br />
+      <input
+        type="text"
+        id="usuari"
+        name="usuari"
+        pattern=".{0,}[@].{0,}"
+        onchange="UsuariValid()"
+        required
+      />
+      <br />
+      <label for="contrasenya">Contrasenya:</label> <br />
+      <input
+        type="password"
+        id="contrasenya"
+        name="contrasenya"
+        onchange="ContraValid()"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+        required
+      />
+      <br />
+      <div>
+        <input
+          type="checkbox"
+          id="mostrar"
+          name="mostrar"
+          onclick="PasswordShow()"
+        /><label for="mostrar">Mostrar contrasenya</label><br />
+      </div>
+      </div>
+      <div id="message_nom">
+        <h3>El nom ha de tenir:</h3>
+        <p id="arroba" class="invalid">Una @</p>
+      </div>
+
+      <div id="message_passwd">
+        <h3>La contrasenya ha de tenir:</h3>
+        <p id="letter" class="invalid">Una lletra <b>minúscula</b></p>
+        <p id="capital" class="invalid">Una lletra <b>majúscula</b></p>
+        <p id="number" class="invalid">Un <b>número</b></p>
+        <p id="length" class="invalid">Mínim <b>8 caràcters</b></p>
+      </div>
+
+      <br /><br /><input type="submit" value="Enviar" id="botonSubmit" />
     </form>
-    <div id="requisitsusuari">
-        <h3>El nom d'usuari ha de tenir</h3>
-        <p id="arrova" class="invalid">Una @</p>
-    </div>
-    <div id="requisitscontrasenya">
-        <h3>La contrasenya d'usuari ha de tenir</h3>
-        <p id="minuscula" class="invalid">Una lletra <b>minúscula</b></p>
-        <p id="majuscula" class="invalid">Una lletra <b>majúscula</b></p>
-        <p id="numero" class="invalid">Un <b>número</b></p>
-        <p id="longitud" class="invalid">Minim <b>8 caracters</b></p>
-    </div>
-</body>
+
+    <script>
+      function PasswordShow() {
+        var tipus = document.getElementById("contrasenya");
+        if (tipus.type == "password") {
+          tipus.type = "text";
+        } else {
+          tipus.type = "password";
+        }
+      }
+      function UsuariValid() {
+        var usuarInput = document.getElementById("usuari");
+        var arrova = document.getElementById("arroba");
+        // Condicions regex de trobar un @
+        var arrovalletres = /@/;
+        if (usuarInput.value.match(arrovalletres)) {
+          arrova.classList.remove("invalid");
+          arrova.classList.add("valid");
+        } else {
+          arrova.classList.remove("valid");
+          arrova.classList.add("invalid");
+        }
+      }
+      function ContraValid() {
+        var contraInput = document.getElementById("contrasenya");
+        var Minuscula = document.getElementById("letter");
+        var Majuscula = document.getElementById("capital");
+        var Numero = document.getElementById("number");
+        var Longitud = document.getElementById("length");
+        // Condicions regex de trobar una minuscula
+        var MinsuculaComprovacio = /[a-z]/g;
+        if (contraInput.value.match(MinsuculaComprovacio)) {
+          Minuscula.classList.remove("invalid");
+          Minuscula.classList.add("valid");
+        } else {
+          Minuscula.classList.remove("valid");
+          Minuscula.classList.add("invalid");
+        }
+        // Condicions regex de trobar una majuscula
+        var MajusculaComprovacio = /[A-Z]/g;
+        if (contraInput.value.match(MajusculaComprovacio)) {
+          Majuscula.classList.remove("invalid");
+          Majuscula.classList.add("valid");
+        } else {
+          Majuscula.classList.remove("valid");
+          Majuscula.classList.add("invalid");
+        }
+        // Condicions regex de trobar un numero
+        var numeroComprovacio = /[0-9]/g;
+        if (contraInput.value.match(numeroComprovacio)) {
+          Numero.classList.remove("invalid");
+          Numero.classList.add("valid");
+        } else {
+          Numero.classList.remove("valid");
+          Numero.classList.add("invalid");
+        }
+        // Condicions regex de trobar el lenght
+        if (contraInput.value.length >= 8) {
+          Longitud.classList.remove("invalid");
+          Longitud.classList.add("valid");
+        } else {
+          Longitud.classList.remove("valid");
+          Longitud.classList.add("invalid");
+        }
+      }
+    </script>
+  </body>
 </html>
