@@ -114,7 +114,7 @@ input[type=submit]  {
 
     <script>
       function PasswordShow() {
-        var tipus = document.getElementById("contrasenya");
+        const tipus = document.getElementById("contrasenya");
         if (tipus.type == "password") {
           tipus.type = "text";
         } else {
@@ -122,26 +122,26 @@ input[type=submit]  {
         }
       }
       function UsuariValid() {
-        var usuarInput = document.getElementById("usuari");
-        var arrova = document.getElementById("arroba");
+        let usuarInput = document.getElementById("usuari");
+        let arroba = document.getElementById("arroba");
         // Condicions regex de trobar un @
-        var arrovalletres = /@/;
-        if (usuarInput.value.match(arrovalletres)) {
-          arrova.classList.remove("invalid");
-          arrova.classList.add("valid");
+        const arroballetres = /@/;
+        if (usuarInput.value.match(arroballetres)) {
+          arroba.classList.remove("invalid");
+          arroba.classList.add("valid");
         } else {
-          arrova.classList.remove("valid");
-          arrova.classList.add("invalid");
+          arroba.classList.remove("valid");
+          arroba.classList.add("invalid");
         }
       }
       function ContraValid() {
-        var contraInput = document.getElementById("contrasenya");
-        var Minuscula = document.getElementById("letter");
-        var Majuscula = document.getElementById("capital");
-        var Numero = document.getElementById("number");
-        var Longitud = document.getElementById("length");
+        let contraInput = document.getElementById("contrasenya");
+        let Minuscula = document.getElementById("letter");
+        let Majuscula = document.getElementById("capital");
+        let Numero = document.getElementById("number");
+        let Longitud = document.getElementById("length");
         // Condicions regex de trobar una minuscula
-        var MinsuculaComprovacio = /[a-z]/g;
+        const MinsuculaComprovacio = /[a-z]/g;
         if (contraInput.value.match(MinsuculaComprovacio)) {
           Minuscula.classList.remove("invalid");
           Minuscula.classList.add("valid");
@@ -150,7 +150,7 @@ input[type=submit]  {
           Minuscula.classList.add("invalid");
         }
         // Condicions regex de trobar una majuscula
-        var MajusculaComprovacio = /[A-Z]/g;
+        const MajusculaComprovacio = /[A-Z]/g;
         if (contraInput.value.match(MajusculaComprovacio)) {
           Majuscula.classList.remove("invalid");
           Majuscula.classList.add("valid");
@@ -159,7 +159,7 @@ input[type=submit]  {
           Majuscula.classList.add("invalid");
         }
         // Condicions regex de trobar un numero
-        var numeroComprovacio = /[0-9]/g;
+        const numeroComprovacio = /[0-9]/g;
         if (contraInput.value.match(numeroComprovacio)) {
           Numero.classList.remove("invalid");
           Numero.classList.add("valid");

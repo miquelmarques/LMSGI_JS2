@@ -1,129 +1,136 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pelis</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pelis</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
+      .cerca {
+        background-color: #f1f1f1;
+        padding: 20px;
+      }
 
-    .cerca {
-      background-color: #f1f1f1;
-      padding: 20px;
-    }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        padding: 20px;
+      }
 
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+      .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
 
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
+      .card:hover {
+        transform: scale(1.02);
+      }
 
-    .card:hover {
-      transform: scale(1.02);
-    }
+      .card img {
+        width: 100%;
+        height: auto;
+      }
 
-    .card img {
-      width: 100%;
-      height: auto;
-    }
+      .targeta {
+        padding: 15px;
+      }
 
-    .targeta {
-      padding: 15px;
-    }
+      .targeta-titol {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
 
-    .targeta-titol {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
+      .targeta-info {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 5px;
+      }
+    </style>
+    <script src="infopelis.js"></script>
+  </head>
 
-    .targeta-info {
-      font-size: 14px;
-      color: #333;
-      margin-bottom: 5px;
-    }
-  </style>
-  <script src="infopelis.js"></script>
-</head>
+  <body>
+    <div class="cerca">
+      <h1 style="text-align: center; padding: 20px 0">
+        Col·leció de pel·lícules
+      </h1>
+      <input
+        type="text"
+        id="cerca"
+        name="Cerca"
+        title="Terme de cerca"
+        required
+      /><br />
+      <button type="button" onclick="funcio()">Cerca</button>
+    </div>
 
-<body>
-  <div class="cerca">
-    <h1 style="text-align: center; padding: 20px 0">
-      Col·leció de pel·lícules
-    </h1>
-    <input type="text" id="cerca" name="Cerca" title="Terme de cerca" required /><br />
-    <button type="button" onclick="funcio()">Cerca</button>
-  </div>
+    <div class="container" id="film-container"></div>
 
-  <div class="container" id="film-container"></div>
+    <script>
+      /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
+      //
 
-  <script>
-    /////////////////////// Fiqueu el vostre codi aquí ////////////////////////
-    //
+      function funcio() {
+        var cerca = document.getElementById("cerca").value;
+        document.getElementById("film-container").innerHTML = null;
+        if (cerca == null) {
+          resultats = films; //fa que si no hi ha text i realitza una cerca mostri tot
+        } else {
+          var resultats = films.filter(
+            (peli) =>
+              Object.values(peli).some((valor) =>
+                String(valor).toLowerCase().includes(cerca.toLowerCase()),
+              ),
+            // Crea un filtre que agafi una peli que sigui mes gran o igual que un valor de peli que contingui algun valor mes gran o mes petit que la cerca del string d'un valor.
+            //fa una cerca per tots els valors de peliqules independement que estigui en majuscula o minuscula.
+          );
+        }
+        for (let i in resultats) {
+          const div = document.createElement("div");
+          const targeta = document.createElement("div");
+          targeta.classList.add("targeta");
+          div.classList.add("card");
+          let titol = document.createElement("h3"); //crea un element html en la clau titol
+          titol.innerHTML = resultats[i].name;
+          titol.classList.add("targeta-titol"); //afegeix la classe
+          let anys = document.createElement("p");
+          anys.innerHTML = `<b> Year: </b> ${resultats[i].year}`;
+          anys.classList.add("targeta-info");
+          let estil = document.createElement("p");
+          estil.innerHTML = `<b> Style: </b> ${resultats[i].style}`;
+          estil.classList.add("targeta-info");
+          let direct = document.createElement("p");
+          direct.innerHTML = `<b> Director: </b> ${resultats[i].director}`;
+          direct.classList.add("targeta-info");
+          let actors = document.createElement("p");
+          actors.classList.add("targeta-info");
+          actors.innerHTML = `<b> Actors: </b> ${resultats[i].actors}`;
+          let oscars = document.createElement("p");
+          oscars.classList.add("targeta-info");
+          oscars.innerHTML = `<b> Oscars: </b> ${resultats[i].oscars}`;
+          targeta.appendChild(titol); //afegeix titol dins de targeta amb la seva classe targeta-titol i el seu text
+          targeta.appendChild(anys); //afegeix any dins de targeta
+          targeta.appendChild(estil); //afegeix estil dins de targeta
+          targeta.appendChild(direct); //afegeix director dins de targeta
+          targeta.appendChild(actors); //afegeix actors dins de targeta
+          targeta.appendChild(oscars); //afegeix oscars dins de targeta
+          div.appendChild(targeta); //afegeix el element targeta dins del div
+          document.getElementById("film-container").appendChild(div); //mostra el resultat de la cerca afegint-lo en el document del div
+        }
+      }
 
-    function funcio() {
-      var cerca = document.getElementById("cerca").value;
-      document.getElementById("film-container").innerHTML = null;
-      if (cerca == null) {
-        resultats = films; //fa que si no hi ha text i realitza una cerca mostri tot
-      } 
-      else {
-      var resultats = films.filter((peli) => Object.values(peli).some((valor) => String(valor).toLowerCase().includes(cerca.toLowerCase()))
-        //fa una cerca per tots els valors de peliqules independement que estigui en majuscula o minuscula.
-      );
-    }
-    for (let i in resultats) {
-      const div = document.createElement("div");
-      const targeta = document.createElement("div");
-      targeta.classList.add("targeta");
-      div.classList.add("card");
-      var titol = document.createElement("h3"); //crea un element html en la clau titol
-      titol.innerHTML = resultats[i].name;
-      titol.classList.add("targeta-titol"); //afegeix la classe
-      var anys = document.createElement("p");
-      anys.innerHTML = "<b> Year: </b>" + resultats[i].year;
-      anys.classList.add("targeta-info"); 
-      var estil = document.createElement("p");
-      estil.innerHTML = "<b> Style: </b>" + resultats[i].style;
-      estil.classList.add("targeta-info"); 
-      var direct = document.createElement("p");
-      direct.innerHTML = "<b> Director: </b>" + resultats[i].director;
-      direct.classList.add("targeta-info"); 
-      var actors = document.createElement("p");
-      actors.classList.add("targeta-info"); 
-      actors.innerHTML = "<b> Actors: </b>" + resultats[i].actors;
-      var oscars = document.createElement("p");
-      oscars.classList.add("targeta-info"); 
-      oscars.innerHTML = "<b> Oscars: </b>" + resultats[i].oscars;
-      targeta.appendChild(titol);//afegeix titol dins de targeta amb la seva classe targeta-titol i el seu text
-      targeta.appendChild(anys);//afegeix any dins de targeta
-      targeta.appendChild(estil);//afegeix estil dins de targeta
-      targeta.appendChild(direct);//afegeix director dins de targeta
-      targeta.appendChild(actors);//afegeix actors dins de targeta
-      targeta.appendChild(oscars); //afegeix oscars dins de targeta
-      div.appendChild(targeta); //afegeix el element targeta dins del div
-      document.getElementById("film-container").appendChild(div);       //mostra el resultat de la cerca afegint-lo en el document del div
-
-    }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-  </script>
-</body>
-
+      ///////////////////////////////////////////////////////////////////////////
+    </script>
+  </body>
 </html>
